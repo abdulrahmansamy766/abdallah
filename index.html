@@ -50,7 +50,6 @@
             justify-content: center;
             padding: 20px;
             transition: opacity 0.8s ease, visibility 0.8s ease;
-            cursor: pointer;
         }
 
         .cover-card {
@@ -383,7 +382,7 @@
         }
     </style>
 </head>
-<body onclick="handleFirstClick(event)">
+<body>
 
     <!-- شاشة الغلاف (الكارت الفاخر الخارجي) -->
     <div id="welcome-overlay">
@@ -571,21 +570,9 @@
         const playBtn = document.getElementById('play-btn');
         const overlay = document.getElementById('welcome-overlay');
         let isPlaying = false;
-        let hasInteracted = false;
-
-        function handleFirstClick(event) {
-            if (!hasInteracted) {
-                hasInteracted = true;
-                audio.play().then(() => {
-                    isPlaying = true;
-                    playBtn.innerText = "❚❚";
-                }).catch(e => console.log("Audio play error:", e));
-            }
-        }
 
         function openInvitation(event) {
             if (event) event.stopPropagation();
-            hasInteracted = true;
             audio.play().then(() => {
                 isPlaying = true;
                 playBtn.innerText = "❚❚";
