@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>عقد قران عبدالله و شيماء</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #2b352b;
+            --card-bg: #f5f2eb;
+            --olive: #4a5d4e;
+            --olive-dark: #354238;
+            --gold: #b39b6b;
+            --text-dark: #2c2c2c;
+            --text-gray: #666666;
+            --border-color: #dcd6c8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 40px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* شاشة الغلاف (الكارت الفاخر الخارجي) */
+        #welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            cursor: pointer;
+        }
+
+        .cover-card {
+            width: 100%;
+            max-width: 440px;
+            height: 100%;
+            max-height: 750px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px 25px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+        }
+
+        .cover-card::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px solid var(--gold);
+            pointer-events: none;
+            border-radius: 10px;
+            opacity: 0.6;
+        }
+
+        .invitation-container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .card-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 45px 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .card-section::before {
+            content: "";
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border: 1px solid var(--border-color);
+            pointer-events: none;
+            border-radius: 10px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Amiri', serif;
+        }
+
+        .couple-names {
+            font-family: 'Amiri', serif;
+            font-size: 42px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .couple-names span {
+            font-size: 28px;
+            display: block;
+            color: var(--olive);
+            margin: 5px 0;
+        }
+
+        .date-badge {
+            font-size: 16px;
+            letter-spacing: 2px;
+            color: var(--text-gray);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: var(--olive-dark);
+            margin-bottom: 15px;
+        }
+
+        .time-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .location-text {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        .img-fluid {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text-gray);
+        }
+
+        .btn-custom {
+            display: inline-block;
+            background-color: var(--olive);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(74, 93, 78, 0.3);
+            margin-top: 10px;
+        }
+
+        .btn-custom:hover {
+            background-color: var(--olive-dark);
+        }
+
+        .music-player-box {
+            background: #eae5dc;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin: 25px 0 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #d5cebf;
+        }
+
+        .music-hint {
+            font-size: 12px;
+            color: var(--olive-dark);
+            font-weight: 600;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .play-main-btn {
+            width: 45px;
+            height: 45px;
+            background-color: var(--olive) !important;
+            color: #fff !important;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            font-size: 16px;
+        }
+
+        .countdown-box {
+            background-color: var(--olive);
+            color: #fff;
+            padding: 25px 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .countdown-title {
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #d1c7b7;
+            margin-bottom: 10px;
+        }
+
+        .countdown-timer {
+            font-family: 'Amiri', serif;
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            direction: ltr;
+        }
+
+        .countdown-labels {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            font-size: 11px;
+            color: #c2b6a3;
+        }
+
+        .gran-dia {
+            font-family: 'Amiri', serif;
+            font-size: 24px;
+            margin: 20px 0 10px;
+            color: #fff;
+        }
+
+        .calendar-table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .calendar-table th {
+            color: #bfae95;
+            padding: 5px;
+            font-weight: 600;
+        }
+
+        .calendar-table td {
+            padding: 6px;
+            text-align: center;
+        }
+
+        .calendar-table td.highlight {
+            background-color: var(--gold);
+            color: #fff;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 30px 0 10px;
+            padding-right: 20px;
+            text-align: right;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 35px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background-color: var(--border-color);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .timeline-icon {
+            width: 32px;
+            height: 32px;
+            background: #fff;
+            border: 2px solid var(--olive);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 20px;
+            z-index: 2;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .timeline-content h4 {
+            font-size: 14px;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .timeline-content span {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        .wishes-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+            text-align: right;
+        }
+
+        .wishes-form input, .wishes-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 13px;
+            background-color: #fff;
+            color: var(--text-dark);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .wishes-form input:focus, .wishes-form textarea:focus {
+            border-color: var(--olive);
+        }
+
+        .wishes-form textarea {
+            resize: none;
+            height: 90px;
+        }
+    </style>
+</head>
+<body onclick="handleFirstClick(event)">
+
+    <!-- شاشة الغلاف (الكارت الفاخر الخارجي) -->
+    <div id="welcome-overlay">
+        <div class="cover-card">
+            <div>
+                <div style="font-size: 30px; color: var(--gold); margin-bottom: 10px;">🕊️</div>
+                <div style="font-size: 12px; letter-spacing: 3px; color: var(--text-gray); text-transform: uppercase; margin-bottom: 15px;">دعوة عقد قران</div>
+                <h1 class="couple-names" style="font-size: 38px;">
+                    عبدالله
+                    <span>&</span>
+                    شيماء
+                </h1>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <p style="font-family: 'Amiri', serif; font-size: 16px; color: var(--olive-dark); line-height: 1.8; margin-bottom: 15px;">
+                    "بالمودة والرحمة نلتقي، وبحضوركم تكتمل فرحتنا"
+                </p>
+                <div class="date-badge" style="margin-bottom: 20px;">٢٥ سبتمبر ٢٠٢٦</div>
+                <button class="btn-custom" onclick="openInvitation(event)">فتح الدعوة والدخول 💌</button>
+            </div>
+
+            <div style="font-size: 11px; color: var(--text-gray); letter-spacing: 1px;">
+                نتشرف بحضوركم الغالي
+            </div>
+        </div>
+    </div>
+
+    <!-- ملف الصوت الخلفي -->
+    <audio id="wedding-audio" src="background-music.wav" loop preload="auto"></audio>
+
+    <div class="invitation-container">
+        
+        <!-- الكارت الأول: الآية والعد التنازلي مع الصورة الأولى -->
+        <div class="card-section">
+            <div style="font-size: 24px; color: var(--gold); margin-bottom: 10px;">🕊️</div>
+            <h1 class="couple-names">
+                عبدالله
+                <span>&</span>
+                شيماء
+            </h1>
+            <div class="date-badge">٢٥ سبتمبر ٢٠٢٦</div>
+
+            <!-- الصورة الأولى داخل الدعوة -->
+            <img src="photo1.jpeg" alt="Couple Photo 1" class="img-fluid">
+
+            <p style="font-family: 'Amiri', serif; font-size: 18px; color: var(--olive-dark); margin-bottom: 20px; line-height: 1.6;">
+                "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"
+            </p>
+
+            <div class="music-player-box">
+                <span class="music-hint">التحكم في الموسيقى</span>
+                <div class="player-controls">
+                    <button onclick="togglePlay(event)" class="play-main-btn" id="play-btn">▶</button>
+                </div>
+            </div>
+
+            <p style="font-size: 13px; margin-top: 25px;">
+                ببالغ الفرح والسرور، تشرفنا دعوتكم لحضور عقد قراننا لنبدأ سوياً حياة تملؤها المودة ورحمة الرحمن.
+            </p>
+
+            <!-- صندوق العد التنازلي وتقويم سبتمبر ٢٠٢٦ -->
+            <div class="countdown-box">
+                <div class="countdown-title">متبقي على الموعد</div>
+                <div class="countdown-timer" id="timer">00 : 00 : 00 : 00</div>
+                <div class="countdown-labels">
+                    <span>يوم</span>
+                    <span>ساعة</span>
+                    <span>دقيقة</span>
+                    <span>ثانية</span>
+                </div>
+
+                <div class="gran-dia">يوم العقد المُبارك</div>
+                <div style="font-size: 13px; letter-spacing: 2px; margin-bottom: 15px; color: #d1c7b7;">سبتمبر ٢٠٢٦</div>
+
+                <table class="calendar-table">
+                    <thead>
+                        <tr>
+                            <th>إثنين</th>
+                            <th>ثلاثاء</th>
+                            <th>أربعاء</th>
+                            <th>خميس</th>
+                            <th>جمعة</th>
+                            <th>سبت</th>
+                            <th>أحد</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td>
+                        </tr>
+                        <tr>
+                            <td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td>
+                        </tr>
+                        <tr>
+                            <td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td>
+                        </tr>
+                        <tr>
+                            <td>21</td><td>22</td><td>23</td><td>24</td>
+                            <td class="highlight">25</td>
+                            <td>26</td><td>27</td>
+                        </tr>
+                        <tr>
+                            <td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- الكارت الثاني: تفاصيل المكان والبرنامج مع الصورة الثانية -->
+        <div class="card-section">
+            <h2 class="section-title">عقد القران</h2>
+            <div class="time-text">الساعة ٥:٠٠ مسائاً</div>
+            <div class="location-text">قاعة الاحتفالات الكبرى<br>القاهرة، مصر</div>
+            <a href="https://maps.google.com" target="_blank" class="btn-custom">عرض الموقع على الخريطة 📍</a>
+
+            <hr style="border: none; border-top: 1px solid var(--border-color); margin: 35px 0;">
+
+            <h2 class="section-title">برنامج اليوم</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">📜</div>
+                    <div class="timeline-content">
+                        <h4>٥:٠٠ مساءً</h4>
+                        <span>وصول الضيوف وعقد القران</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">💐</div>
+                    <div class="timeline-content">
+                        <h4>٦:٠٠ مساءً</h4>
+                        <span>جلسة التصوير التذكارية</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">🍽️</div>
+                    <div class="timeline-content">
+                        <h4>٧:٠٠ مساءً</h4>
+                        <span>توزيع الضيافة والعشاء</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">✨</div>
+                    <div class="timeline-content">
+                        <h4>٩:٠٠ مساءً</h4>
+                        <span>ختام الاحتفال</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الصورة الثانية داخل الدعوة -->
+            <img src="photo2.jpeg" alt="Couple Photo 2" class="img-fluid" style="margin-top: 30px;">
+        </div>
+
+        <!-- الكارت الثالث: إرسال رسالة تهنئة -->
+        <div class="card-section">
+            <div style="font-size: 28px; color: var(--gold); margin-bottom: 10px;">💌</div>
+            <h2 class="section-title">أرسل تهنئة للعروسين</h2>
+            <p style="font-size: 13px; margin-bottom: 15px;">
+                اترك بصمتك وكلماتك الطيبة لتصل مباشرة إلى قلبيهما في يومهما السعيد:
+            </p>
+
+            <div class="wishes-form">
+                <input type="text" id="sender-name" placeholder="اسمك الكريم...">
+                <textarea id="sender-message" placeholder="اكتب رسالة التهنئة هنا..."></textarea>
+                <button type="button" class="btn-custom" style="width: 100%; text-align: center; margin-top: 5px;" onclick="sendWhatsAppWish()">إرسال التهنئة عبر واتساب 💬</button>
+            </div>
+
+            <div style="margin-top: 35px;">
+                <p style="font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-gray); margin-bottom: 5px;">
+                    ننتظركم بشوق لتكتمل فرحتنا
+                </p>
+                <h3 style="font-family: 'Amiri', serif; font-size: 28px; color: var(--olive-dark);">
+                    عبدالله & شيماء
+                </h3>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const audio = document.getElementById('wedding-audio');
+        const playBtn = document.getElementById('play-btn');
+        const overlay = document.getElementById('welcome-overlay');
+        let isPlaying = false;
+        let hasInteracted = false;
+
+        function handleFirstClick(event) {
+            if (!hasInteracted) {
+                hasInteracted = true;
+                audio.play().then(() => {
+                    isPlaying = true;
+                    playBtn.innerText = "❚❚";
+                }).catch(e => console.log("Audio play error:", e));
+            }
+        }
+
+        function openInvitation(event) {
+            if (event) event.stopPropagation();
+            hasInteracted = true;
+            audio.play().then(() => {
+                isPlaying = true;
+                playBtn.innerText = "❚❚";
+            }).catch(e => console.log("Audio play error:", e));
+
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.visibility = 'hidden';
+            }, 800);
+        }
+
+        function togglePlay(event) {
+            if (event) event.stopPropagation();
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    playBtn.innerText = "❚❚";
+                }).catch(e => console.log("Audio play error:", e));
+            } else {
+                audio.pause();
+                isPlaying = false;
+                playBtn.innerText = "▶";
+            }
+        }
+
+        function sendWhatsAppWish() {
+            const name = document.getElementById('sender-name').value.trim();
+            const message = document.getElementById('sender-message').value.trim();
+
+            if (!name || !message) {
+                alert('الرجاء إدخال الاسم وكتابة رسالة التهنئة أولاً.');
+                return;
+            }
+
+            const phoneNumber = "201000000000"; 
+            const encodedText = encodeURIComponent(`مرحباً، أنا ${name} 🕊️\n\nإليك تهنئتي بمناسبة عقد القران:\n"${message}"`);
+            
+            window.open(`https://wa.me/${phoneNumber}?text=${encodedText}`, '_blank');
+        }
+
+        // عداد تنازلي لتاريخ ٢٥ سبتمبر ٢٠٢٦
+        const weddingDate = new Date("Sep 25, 2026 17:00:00").getTime();
+
+        const timerInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                document.getElementById("timer").innerText = "مبارك العقد!";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerText = 
+                String(days).padStart(2, '0') + " : " + 
+                String(hours).padStart(2, '0') + " : " + 
+                String(minutes).padStart(2, '0') + " : " + 
+                String(seconds).padStart(2, '0');
+        }, 1000);
+    </script>
+</body>
+</html>
